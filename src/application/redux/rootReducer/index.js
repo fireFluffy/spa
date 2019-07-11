@@ -1,10 +1,10 @@
 // Modules
 import { combineReducers } from 'redux';
 // Reducers
-import testReducer from '../testReducer/reducers';
+import mainReducer from '../../reducers';
 
 const rootReducer = combineReducers({
-  test: testReducer,
+  main: mainReducer,
 });
 
 export default rootReducer;

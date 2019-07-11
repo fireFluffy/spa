@@ -12,5 +12,6 @@
 [lints]
 
 [options]
+suppress_comment= \\(.\\|\n\\)*\\$FlowFixMe
 
 [strict]
