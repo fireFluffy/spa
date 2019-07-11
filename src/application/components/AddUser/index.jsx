@@ -15,8 +15,9 @@ class AddUserComponent extends PureComponent<TProps, null> {
       changeVisibleAdd,
       location,
       visibleAdd,
-      length,
+      peoplesList,
       addPeopleList,
+      editPeopleList,
       editProfile,
     } = this.props;
     const { pathname } = location;
@@ -35,8 +36,9 @@ class AddUserComponent extends PureComponent<TProps, null> {
           width="80%"
           visible={visibleAdd}>
           <FormContainer
-            length={length}
+            peoplesList={peoplesList}
             addPeopleList={addPeopleList}
+            editPeopleList={editPeopleList}
             editProfile={editProfile}
             changeVisibleAdd={changeVisibleAdd}
           />

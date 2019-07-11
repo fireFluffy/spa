@@ -11,34 +11,36 @@ const { FIELDS } = FORM;
 
 class FormContainer extends PureComponent<{}, null> {
   handleCreateSubmit = e => {
-    const { form, addPeopleList, changeVisibleAdd, length } = this.props;
+    const { form, addPeopleList, changeVisibleAdd, peoplesList } = this.props;
     const { validateFields } = form;
 
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        addPeopleList({ key: length, ...values });
+        addPeopleList({ key: peoplesList.length, ...values });
         changeVisibleAdd();
       }
     });
   };
 
   handleEditSubmit = e => {
-    const { form, changeVisibleAdd, length } = this.props;
+    const { form, editPeopleList, editProfile, changeVisibleAdd, length } = this.props;
     const { validateFields } = form;
 
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
+        editPeopleList(peoplesList[editProfile].key, values);
         changeVisibleAdd();
       }
     });
   };
 
   renderField = item => {
-    const { editProfile, form } = this.props;
+    const { editProfile, form, peoplesList } = this.props;
     const { getFieldDecorator } = form;
-    const initialValue = editProfile ? { initialValue: editProfile[item.name] } : {};
+    const initialValue =
+      editProfile !== undefined ? { initialValue: peoplesList[editProfile][item.name] } : {};
 
     return (
       <Col key={item.name} span={item.span}>

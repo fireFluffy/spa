@@ -52,7 +52,7 @@ class TableContainer extends PureComponent<TProps, TState> {
   };
 
   render() {
-    const { editProfile, peoplesList, addPeopleList } = this.props;
+    const { editProfile, peoplesList, addPeopleList, editPeopleList } = this.props;
     const { visibleAdd } = this.state;
     const { location } = this.props;
 
@@ -64,10 +64,11 @@ class TableContainer extends PureComponent<TProps, TState> {
       <BodyWrap>
         <AddUserComponent
           addPeopleList={addPeopleList}
+          editPeopleList={editPeopleList}
           editProfile={editProfile}
           changeVisibleAdd={this.changeVisibleAdd}
           location={location}
-          length={peoplesList.length}
+          peoplesList={peoplesList}
           visibleAdd={visibleAdd}
         />
         <TableComponent />

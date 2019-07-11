@@ -28,18 +28,26 @@ class TableItemRouterComponent extends PureComponent<{}, null> {
     super(props);
     const { match, peoplesList, setEditProfile } = props;
     const { key } = match.params;
-    this.item = [peoplesList.find(i => i.key === +key)];
+    this.index = peoplesList.findIndex(i => i.key === +key);
 
-    setEditProfile(this.item[0]);
+    setEditProfile(this.index);
   }
 
   componentWillUnmount() {
-    const { setEditProfile } = this.props;
+    const { setEditProfile, peoplesList } = this.props;
     setEditProfile();
   }
 
   render() {
-    return <Table bordered columns={PROFILE_COLUMNS} dataSource={this.item} pagination={false} />;
+    const { peoplesList } = this.props;
+    return (
+      <Table
+        bordered
+        columns={PROFILE_COLUMNS}
+        dataSource={[peoplesList[this.index]]}
+        pagination={false}
+      />
+    );
   }
 }
 

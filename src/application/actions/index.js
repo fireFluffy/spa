@@ -14,9 +14,9 @@ export const addPeopleList: TAddPeopleList = obj => ({
   payload: obj,
 });
 
-export const editPeopleList: TEditPeopleList = (index, obj) => ({
+export const editPeopleList: TEditPeopleList = (key, obj) => ({
   type: EDIT_LIST_PEOPLE,
-  payload: { index, obj },
+  payload: { key, obj },
 });
 
 export const setEditProfile = (key = null) => ({

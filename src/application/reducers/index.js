@@ -17,7 +17,8 @@ const mainReducer = (state = mainState, { payload, type }) =>
       }
 
       case EDIT_LIST_PEOPLE: {
-        const { index, obj } = payload;
+        const { key, obj } = payload;
+        const index = draft.people.findIndex(i => i.key === key);
         draft.people[index] = obj;
         break;
       }
