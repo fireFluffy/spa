@@ -4,7 +4,7 @@ import { Input } from 'antd';
 
 const { TextArea } = Input;
 
-const RenderField = ({ type, ...options }) => {
+const GetField = ({ type, ...options }) => {
   switch (type) {
     case 'textarea':
       return <TextArea {...options} />;
@@ -15,4 +15,4 @@ const RenderField = ({ type, ...options }) => {
 };
 
 // $FlowFixMe
-export default memo(RenderField);
+export default memo(GetField);

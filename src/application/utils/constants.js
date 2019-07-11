@@ -5,7 +5,7 @@ const constants: Object = {
     PREFIX: 'SPA_123',
   },
   LIST_PEOPLE: {
-    START_QUANTITY: 20,
+    START_QUANTITY: 10,
   },
   TABLE: {
     COLUMNS: [
@@ -26,6 +26,7 @@ const constants: Object = {
       },
     ],
   },
+
   FORM: {
     FIELDS: [
       {
@@ -57,7 +58,6 @@ const constants: Object = {
         label: 'Описание',
         placeholder: 'Добавьте описание',
         required: false,
-        minLength: 4,
         span: 24,
         rows: 4,
         type: 'textarea',
@@ -65,8 +65,16 @@ const constants: Object = {
     ],
   },
 };
-const { PREFIX } = constants.LOCAL_STORAGE;
+const { LOCAL_STORAGE, TABLE } = constants;
+const { PREFIX } = LOCAL_STORAGE;
+const { COLUMNS } = TABLE;
+const description = {
+  title: 'Описание',
+  dataIndex: 'description',
+  key: 'description',
+};
 
 constants.LOCAL_STORAGE.PEOPLE = `${PREFIX}_PEOPLE`;
+constants.TABLE.PROFILE_COLUMNS = COLUMNS.concat(description);
 
 export default constants;

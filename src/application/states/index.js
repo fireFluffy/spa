@@ -1,4 +1,5 @@
 const mainState = {
+  editProfile: null,
   people: null,
 };
 

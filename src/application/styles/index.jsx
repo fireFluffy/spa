@@ -14,7 +14,11 @@ export const TableWrap = styled.div`
 `;
 
 export const ButtonWrap = styled.div`
-  margin: 0 0 25px 0;
+  margin: 0 0 25px -15px;
+
+  & > * {
+    margin-left: 15px;
+  }
 `;
 
 export const RowForm = styled(Row)`
@@ -23,4 +27,13 @@ export const RowForm = styled(Row)`
 
 export const ModalAddWrap = styled(Modal)`
   max-width: 900px;
+`;
+
+export const ButtonPanel = styled.div`
+  display: flex;
+  margin: 0 0 0 -15px;
+
+  & > * {
+    margin-left: 15px;
+  }
 `;

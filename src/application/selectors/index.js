@@ -6,9 +6,15 @@ export default mainSelector;
 
 export const listPeoplesSelector = createSelector(
   mainSelector,
-  ({ people }) => (people ? people.reverse() : people)
+  ({ people }) => people
+);
+
+export const editProfileSelector = createSelector(
+  mainSelector,
+  ({ editProfile }) => editProfile
 );
 
 export const mainStructuredSelector = createStructuredSelector({
+  editProfile: editProfileSelector,
   peoplesList: listPeoplesSelector,
 });

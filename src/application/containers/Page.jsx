@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 import type {
   TableContainerProps as TProps,
@@ -10,15 +11,13 @@ import type {
 } from '../types';
 
 import { mainStructuredSelector } from '../selectors';
-import setPeopleList, { editPeopleList } from '../actions';
+import setPeopleList, { addPeopleList, editPeopleList } from '../actions';
 
 import TableComponent from '../components/Table';
 import AddUserComponent from '../components/AddUser';
-import FormContainer from '../components/Form';
-import BodyWrap, { ModalAddWrap } from '../styles';
+import BodyWrap from '../styles';
 
 import getPeople from '../utils/getPeople';
-import strings from '../utils/strings';
 
 const PEOPLE = getPeople();
 
@@ -26,6 +25,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       setPeopleList,
+      addPeopleList,
       editPeopleList,
     },
     dispatch
@@ -52,8 +52,9 @@ class TableContainer extends PureComponent<TProps, TState> {
   };
 
   render() {
-    const { peoplesList } = this.props;
+    const { editProfile, peoplesList, addPeopleList } = this.props;
     const { visibleAdd } = this.state;
+    const { location } = this.props;
 
     if (!peoplesList) {
       return null;
@@ -61,21 +62,18 @@ class TableContainer extends PureComponent<TProps, TState> {
 
     return (
       <BodyWrap>
-        <ModalAddWrap
-          width="80%"
-          centered
-          footer={null}
-          onCancel={this.changeVisibleAdd}
-          onOk={this.changeVisibleAdd}
-          title={strings.ADD_USER}
-          visible={visibleAdd}>
-          <FormContainer />
-        </ModalAddWrap>
-        <AddUserComponent changeVisibleAdd={this.changeVisibleAdd} />
-        <TableComponent peoplesList={peoplesList} />
+        <AddUserComponent
+          addPeopleList={addPeopleList}
+          editProfile={editProfile}
+          changeVisibleAdd={this.changeVisibleAdd}
+          location={location}
+          length={peoplesList.length}
+          visibleAdd={visibleAdd}
+        />
+        <TableComponent />
       </BodyWrap>
     );
   }
 }
 
-export default TableContainer;
+export default withRouter(TableContainer);

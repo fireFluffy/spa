@@ -17,6 +17,13 @@ export type TSetPeopleList = (
   payload: TListPeople,
 |};
 
+export type TAddPeopleList = (
+  obj: TListPeopleItem
+) => {|
+  type: 'ADD_LIST_PEOPLE',
+  payload: TListPeopleItem,
+|};
+
 export type TEditPeopleList = (
   index: number,
   obj: TListPeopleItem
@@ -28,6 +35,7 @@ export type TEditPeopleList = (
 // Table Container
 export type TableContainerProps = {|
   setPeopleList: TSetPeopleList,
+  addPeopleList: TAddPeopleList,
   editPeopleList: TEditPeopleList,
   peoplesList: TListPeople,
 |};
@@ -40,9 +48,7 @@ export type TChangeVisibleAdd = () => void;
 // ---
 
 // Table Component
-export type TableComponentProps = {|
-  peoplesList: TListPeople,
-|};
+export type TableComponentProps = {||};
 
 export type TableStringComponentProps = {|
   man: TListPeopleItem,
