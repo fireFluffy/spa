@@ -4,7 +4,7 @@ import { Input } from 'antd';
 
 const { TextArea } = Input;
 
-const GetField = ({ type, ...options }) => {
+const GetField = ({ type, ...options }: { type: string }) => {
   switch (type) {
     case 'textarea':
       return <TextArea {...options} />;

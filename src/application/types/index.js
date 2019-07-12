@@ -1,12 +1,16 @@
-// @flow
+import { number } from 'prop-types';
+import { setEditProfile } from '../actions';
 
-export type TListPeopleItem = {|
+// @flow
+export type TEditProfile = ?number;
+
+export type TListPeopleItem = {
   key: string,
   firstName: string,
   lastName: string,
   position: string,
-  description: string,
-|};
+  description: ?string,
+};
 
 export type TListPeople = Array<TListPeopleItem>;
 
@@ -17,6 +21,13 @@ export type TSetPeopleList = (
   payload: TListPeople,
 |};
 
+export type TSetEditProfile = (
+  key: ?number
+) => {|
+  type: 'SET_EDIT_PROFILE',
+  payload: ?number,
+|};
+
 export type TAddPeopleList = (
   obj: TListPeopleItem
 ) => {|
@@ -25,14 +36,15 @@ export type TAddPeopleList = (
 |};
 
 export type TEditPeopleList = (
-  index: number,
   obj: TListPeopleItem
 ) => {|
   type: 'EDIT_LIST_PEOPLE',
-  payload: { index: number, obj: TListPeopleItem },
+  payload: TListPeopleItem,
 |};
 
 // Table Container
+export type TableRouterProps = {||};
+
 export type TableContainerProps = {|
   setPeopleList: TSetPeopleList,
   addPeopleList: TAddPeopleList,
@@ -50,17 +62,37 @@ export type TChangeVisibleAdd = () => void;
 // Table Component
 export type TableComponentProps = {||};
 
+export type TableItemProps = {|
+  peoplesList: TListPeople,
+  setEditProfile: TSetEditProfile,
+|};
+
 export type TableStringComponentProps = {|
   man: TListPeopleItem,
 |};
+// ---
 
 // AddUser Component
 export type AddUserComponentProps = {|
   changeVisibleAdd: TChangeVisibleAdd,
+  addPeopleList: TAddPeopleList,
+  editPeopleList: TEditPeopleList,
+  peoplesList: TListPeople,
+  editProfile: TEditProfile,
 |};
 // ---
 
 // Form
+// ---FormContainer
+export type FormContainerProps = {|
+  form: *,
+  addPeopleList: TAddPeopleList,
+  changeVisibleAdd: TChangeVisibleAdd,
+  editPeopleList: TEditPeopleList,
+  peoplesList: TListPeople,
+  editProfile: TEditProfile,
+|};
+
 // ---RenderField
 export type RenderFieldProps = {
   id: string,

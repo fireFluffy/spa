@@ -6,10 +6,12 @@ import GetField from './GetField';
 import RenderFooter from './Footer';
 import constants from '../../utils/constants';
 
+import type { FormContainerProps as TProps } from '../../types';
+
 const { FORM } = constants;
 const { FIELDS } = FORM;
 
-class FormContainer extends PureComponent<{}, null> {
+class FormContainer extends PureComponent<TProps, null> {
   handleSubmit = e => {
     const {
       form,
@@ -24,7 +26,7 @@ class FormContainer extends PureComponent<{}, null> {
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        if (editProfile !== null) {
+        if (editProfile !== null && editProfile !== undefined) {
           editPeopleList({ key: peoplesList[editProfile].key, ...values });
         } else {
           addPeopleList({ key: peoplesList.length, ...values });
@@ -38,7 +40,9 @@ class FormContainer extends PureComponent<{}, null> {
     const { editProfile, form, peoplesList } = this.props;
     const { getFieldDecorator } = form;
     const initialValue =
-      editProfile !== null ? { initialValue: peoplesList[editProfile][item.name] } : {};
+      editProfile !== null && editProfile !== undefined
+        ? { initialValue: peoplesList[editProfile][item.name] }
+        : {};
 
     return (
       <Col key={item.name} span={item.span}>
@@ -53,8 +57,6 @@ class FormContainer extends PureComponent<{}, null> {
   };
 
   render() {
-    const { editProfile } = this.props;
-
     return (
       <Form onSubmit={this.handleSubmit}>
         <Row gutter={24}>{FIELDS.map(this.renderField)}</Row>

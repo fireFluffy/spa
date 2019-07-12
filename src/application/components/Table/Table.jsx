@@ -4,14 +4,14 @@ import { Table } from 'antd';
 import { connect } from 'react-redux';
 
 import { mainStructuredSelector } from '../../selectors';
-import type { TListPeopleItem } from '../../types';
+import type { TListPeopleItem, TableRouterProps as TProps } from '../../types';
 import constants from '../../utils/constants';
 
 const { COLUMNS } = constants.TABLE;
 
 // $FlowFixMe
 @connect(mainStructuredSelector)
-class TableRouterComponent extends PureComponent<{}, null> {
+class TableRouterComponent extends PureComponent<TProps, null> {
   onClick = (man: TListPeopleItem) => {
     const { history } = this.props;
     const { replace } = history;

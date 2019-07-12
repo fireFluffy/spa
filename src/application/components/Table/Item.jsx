@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { setEditProfile } from '../../actions';
 import { mainStructuredSelector } from '../../selectors';
 import constants from '../../utils/constants';
+import type { TableItemProps as TProps } from '../../types';
 
 const { PROFILE_COLUMNS } = constants.TABLE;
 
@@ -23,23 +24,25 @@ const mapDispatchToProps = dispatch =>
   mainStructuredSelector,
   mapDispatchToProps
 )
-class TableItemRouterComponent extends PureComponent<{}, null> {
-  constructor(props) {
+class TableItemRouterComponent extends PureComponent<TProps, null> {
+  index: number;
+
+  constructor(props: TProps) {
     super(props);
-    const { history, match, peoplesList, setEditProfile } = props;
+    const { history, match, peoplesList } = props;
     const { key } = match.params;
 
     if (key) {
       this.index = peoplesList.findIndex(i => i.key === +key);
-      setEditProfile(this.index);
+      props.setEditProfile(this.index);
     } else {
       history.replace('/');
     }
   }
 
   componentWillUnmount() {
-    const { setEditProfile, peoplesList } = this.props;
-    setEditProfile();
+    const { props } = this;
+    props.setEditProfile();
   }
 
   render() {
