@@ -26,7 +26,7 @@ const generatePeople = () =>
       const [firstName, lastName] = faker.name.findName().split(' ');
 
       return {
-        key: index,
+        key: LIST_PEOPLE.START_QUANTITY - index - 1,
         firstName,
         lastName,
         position: faker.name.jobType(),

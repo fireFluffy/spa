@@ -2,12 +2,14 @@ import produce from 'immer';
 
 import mainState from '../states';
 import SET_LIST_PEOPLE, { ADD_LIST_PEOPLE, EDIT_LIST_PEOPLE, SET_EDIT_PROFILE } from '../constants';
+import { setLocalPeople } from '../utils/getPeople';
 
 const mainReducer = (state = mainState, { payload, type }) =>
   produce(state, draft => {
     switch (type) {
       case ADD_LIST_PEOPLE: {
         draft.people.unshift(payload);
+        setLocalPeople(draft.people);
         break;
       }
 
@@ -17,9 +19,8 @@ const mainReducer = (state = mainState, { payload, type }) =>
       }
 
       case EDIT_LIST_PEOPLE: {
-        const { key, obj } = payload;
-        const index = draft.people.findIndex(i => i.key === key);
-        draft.people[index] = obj;
+        draft.people[draft.editProfile] = payload;
+        setLocalPeople(draft.people);
         break;
       }
 

@@ -26,11 +26,15 @@ const mapDispatchToProps = dispatch =>
 class TableItemRouterComponent extends PureComponent<{}, null> {
   constructor(props) {
     super(props);
-    const { match, peoplesList, setEditProfile } = props;
+    const { history, match, peoplesList, setEditProfile } = props;
     const { key } = match.params;
-    this.index = peoplesList.findIndex(i => i.key === +key);
 
-    setEditProfile(this.index);
+    if (key) {
+      this.index = peoplesList.findIndex(i => i.key === +key);
+      setEditProfile(this.index);
+    } else {
+      history.replace('/');
+    }
   }
 
   componentWillUnmount() {

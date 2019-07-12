@@ -10,27 +10,25 @@ const { FORM } = constants;
 const { FIELDS } = FORM;
 
 class FormContainer extends PureComponent<{}, null> {
-  handleCreateSubmit = e => {
-    const { form, addPeopleList, changeVisibleAdd, peoplesList } = this.props;
+  handleSubmit = e => {
+    const {
+      form,
+      addPeopleList,
+      changeVisibleAdd,
+      editProfile,
+      editPeopleList,
+      peoplesList,
+    } = this.props;
     const { validateFields } = form;
 
     e.preventDefault();
     validateFields((err, values) => {
       if (!err) {
-        addPeopleList({ key: peoplesList.length, ...values });
-        changeVisibleAdd();
-      }
-    });
-  };
-
-  handleEditSubmit = e => {
-    const { form, editPeopleList, editProfile, changeVisibleAdd, length } = this.props;
-    const { validateFields } = form;
-
-    e.preventDefault();
-    validateFields((err, values) => {
-      if (!err) {
-        editPeopleList(peoplesList[editProfile].key, values);
+        if (editProfile !== null) {
+          editPeopleList({ key: peoplesList[editProfile].key, ...values });
+        } else {
+          addPeopleList({ key: peoplesList.length, ...values });
+        }
         changeVisibleAdd();
       }
     });
@@ -40,7 +38,7 @@ class FormContainer extends PureComponent<{}, null> {
     const { editProfile, form, peoplesList } = this.props;
     const { getFieldDecorator } = form;
     const initialValue =
-      editProfile !== undefined ? { initialValue: peoplesList[editProfile][item.name] } : {};
+      editProfile !== null ? { initialValue: peoplesList[editProfile][item.name] } : {};
 
     return (
       <Col key={item.name} span={item.span}>
@@ -56,10 +54,9 @@ class FormContainer extends PureComponent<{}, null> {
 
   render() {
     const { editProfile } = this.props;
-    const onSubmit = editProfile ? this.handleEditSubmit : this.handleCreateSubmit;
 
     return (
-      <Form onSubmit={onSubmit}>
+      <Form onSubmit={this.handleSubmit}>
         <Row gutter={24}>{FIELDS.map(this.renderField)}</Row>
         <Form.Item>
           <RenderFooter />
@@ -69,4 +66,4 @@ class FormContainer extends PureComponent<{}, null> {
   }
 }
 
-export default Form.create({ name: 'createForm' })(FormContainer);
+export default Form.create({ name: 'userForm' })(FormContainer);

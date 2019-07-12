@@ -16,6 +16,7 @@ const devConfig = {
   output: {
     filename: './js/[name].[hash].js',
     path: path.resolve(__dirname, 'public'),
+    publicPath: '/',
   },
 
   devServer: {
@@ -85,7 +86,7 @@ const devConfig = {
     ]),
     new HtmlWebpackPlugin({
       filename: 'index.html',
-      template: path.join(__dirname, 'assets/html/index.html'),
+      template: path.join(__dirname, './assets/html/index.html'),
     }),
     new CleanTerminalPlugin(),
     new webpack.NamedModulesPlugin(),

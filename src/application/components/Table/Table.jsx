@@ -14,9 +14,9 @@ const { COLUMNS } = constants.TABLE;
 class TableRouterComponent extends PureComponent<{}, null> {
   onClick = (man: TListPeopleItem) => {
     const { history } = this.props;
-    const { push } = history;
+    const { replace } = history;
 
-    push(`/profile/${man.key}`);
+    replace(`/profile/${man.key}`);
   };
 
   render() {
@@ -28,8 +28,8 @@ class TableRouterComponent extends PureComponent<{}, null> {
         columns={COLUMNS}
         dataSource={peoplesList}
         pagination={{ pageSize: 50, size: 'small' }}
-        onRow={(record, rowIndex) => ({
-          onClick: () => this.onClick(record, rowIndex),
+        onRow={record => ({
+          onClick: () => this.onClick(record),
         })}
       />
     );

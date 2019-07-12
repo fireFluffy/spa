@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import type { TableComponentProps as TProps } from '../../types';
 
 import TableRouterComponent from './Table';
@@ -12,8 +12,10 @@ class TableComponent extends PureComponent<TProps, null> {
   render() {
     return (
       <TableWrap>
-        <Route exact path="/" component={TableRouterComponent} />
-        <Route exact path="/profile/:key" component={TableItemRouterComponent} />
+        <Switch>
+          <Route exact path="/profile/:key" component={TableItemRouterComponent} />
+          <Route path="/" component={TableRouterComponent} />
+        </Switch>
       </TableWrap>
     );
   }
